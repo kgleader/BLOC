@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_bloc/cubit/weather_cubit.dart';
 import 'package:weather_bloc/models/weather_response.dart';
-import 'package:weather_bloc/services/fetch_weather.dart';
 
-import '../cubit/weather_cubit.dart';
+import '../services/fetch_weather.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -11,7 +11,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => WeatherCubit(weatherService),
+      create: (context) =>
+          WeatherCubit(weatherService)..getWeatherByCityName('Bishkek'),
       child: const HomeView(),
     );
   }
@@ -55,10 +56,7 @@ class ErrorWidget extends StatelessWidget {
 }
 
 class WeatherSuccessWidget extends StatelessWidget {
-  const WeatherSuccessWidget(
-    this.weatherResponse, {
-    Key? key,
-  }) : super(key: key);
+  const WeatherSuccessWidget(this.weatherResponse, {super.key});
 
   final WeatherResponse weatherResponse;
 
@@ -74,9 +72,9 @@ class WeatherSuccessWidget extends StatelessWidget {
           Text(weatherResponse.weather[0].icon),
           Text(weatherResponse.weather[0].description),
           Text('${weatherResponse.main.feelsLike}'),
-          Text('${weatherResponse.main.tempMin}'),
-          Text('${weatherResponse.main.temMax}'),
           Text('${weatherResponse.main.temp}'),
+          Text('${weatherResponse.main.tempMax}'),
+          Text('${weatherResponse.main.tempMin}'),
         ],
       ),
     );
@@ -84,9 +82,7 @@ class WeatherSuccessWidget extends StatelessWidget {
 }
 
 class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({
-    Key? key,
-  }) : super(key: key);
+  const LoadingWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

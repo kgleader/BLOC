@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:weather_bloc/models/weather.dart';
+
 import 'main_model.dart';
+import 'weather.dart';
 
 class WeatherResponse {
   const WeatherResponse({
