@@ -11,6 +11,12 @@ class WeatherCubit extends Cubit<WeatherState> {
   final WeatherService service;
 
   Future<void> getWeatherByCityName(String cityName) async {
+    emit(WeatherLoading());
     final data = await service.getWeatherByCityName(cityName);
+    if (data != null) {
+      emit(WeatherSuccess(data));
+    } else {
+      emit(const WeatherError('bir kata boldu'));
+    }
   }
 }

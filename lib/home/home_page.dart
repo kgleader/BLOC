@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_bloc/models/weather_response.dart';
 import 'package:weather_bloc/services/fetch_weather.dart';
 
 import '../cubit/weather_cubit.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key, required String title});
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,25 +17,79 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  @override
-  void initState() {
-    context.read<WeatherCubit>.getWeatherByCityName('Bishek');
-    super.initState();
-  }
-
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomePage'),
+      appBar: AppBar(title: const Text('HomePage')),
+      body: BlocBuilder<WeatherCubit, WeatherState>(
+        builder: (context, state) {
+          if (state is WeatherInitial) {
+            return const Text('WeatherInitial');
+          } else if (state is WeatherLoading) {
+            return const LoadingWidget();
+          } else if (state is WeatherSuccess) {
+            return WeatherSuccessWidget(state.weatherResponse);
+          } else if (state is WeatherError) {
+            return ErrorWidget(state.errorText);
+          } else {
+            return const Text('Bilbeim');
+          }
+        },
       ),
     );
+  }
+}
+
+class ErrorWidget extends StatelessWidget {
+  const ErrorWidget(this.errorText, {Key? key}) : super(key: key);
+
+  final String errorText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text(errorText));
+  }
+}
+
+class WeatherSuccessWidget extends StatelessWidget {
+  const WeatherSuccessWidget(
+    this.weatherResponse, {
+    Key? key,
+  }) : super(key: key);
+
+  final WeatherResponse weatherResponse;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(weatherResponse.name),
+          Text(weatherResponse.weather[0].main),
+          Text(weatherResponse.weather[0].icon),
+          Text(weatherResponse.weather[0].description),
+          Text('${weatherResponse.main.feelsLike}'),
+          Text('${weatherResponse.main.tempMin}'),
+          Text('${weatherResponse.main.temMax}'),
+          Text('${weatherResponse.main.temp}'),
+        ],
+      ),
+    );
+  }
+}
+
+class LoadingWidget extends StatelessWidget {
+  const LoadingWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: CircularProgressIndicator());
   }
 }

@@ -16,7 +16,7 @@ class WeatherResponse {
   factory WeatherResponse.fromMap(Map<String, dynamic> map) {
     return WeatherResponse(
       weather: List<Weather>.from(
-        (map['weather'] as List<int>).map<Weather>(
+        (map['weather'] as List).map<Weather>(
           (x) => Weather.fromJson(x as Map<String, dynamic>),
         ),
       ),
