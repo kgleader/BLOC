@@ -1,4 +1,4 @@
-name: bbc_news
+name: weather_bloc
 description: A new Flutter project.
 
 publish_to: 'none' 
@@ -11,9 +11,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+      
   cupertino_icons: ^1.0.2
-  share_plus: ^6.3.0
+  http: ^0.13.5
+  flutter_bloc: ^8.1.1
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -22,5 +24,36 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
- 
+  
   uses-material-design: true
+
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

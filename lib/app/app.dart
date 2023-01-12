@@ -1,5 +1,6 @@
-import 'package:bbc_news/views/home_view.dart';
 import 'package:flutter/material.dart';
+
+import '../home/home_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(title: 'Жанылыктар'),
+      home: const HomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
