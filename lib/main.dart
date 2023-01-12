@@ -1,1 +1,7 @@
-void main(List<String> args) {}
+import 'package:flutter/material.dart';
+
+import 'app.dart';
+
+void main() {
+  runApp(const MyApp());
+}
