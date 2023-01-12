@@ -5,12 +5,13 @@ class Weather {
     required this.description,
     required this.icon,
   });
+
   final int id;
   final String main;
   final String description;
   final String icon;
 
-  factory Weather.fromMap(Map<String, dynamic> map) {
+  factory Weather.fromJson(Map<String, dynamic> map) {
     return Weather(
       id: map['id'] as int,
       main: map['main'] as String,
@@ -18,6 +19,4 @@ class Weather {
       icon: map['icon'] as String,
     );
   }
-
-  static fromJson(Map<String, dynamic> x) {}
 }
