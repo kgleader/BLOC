@@ -24,7 +24,9 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('HomePage')),
+      appBar: AppBar(
+        title: const Text('HomePage'),
+      ),
       body: BlocBuilder<WeatherCubit, WeatherState>(
         builder: (context, state) {
           if (state is WeatherInitial) {
