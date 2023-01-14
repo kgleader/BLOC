@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:http/http.dart' as http;
 import 'package:weather_bloc/constants/api_const.dart';
 import 'package:weather_bloc/models/weather_response.dart';
